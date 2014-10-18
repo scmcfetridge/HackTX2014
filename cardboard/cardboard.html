@@ -42,7 +42,7 @@
       container = document.getElementById('example');
       container.appendChild(element);
 
-      effect = new THREE.StereoEffect(renderer);
+      effect = new THREE.StereoEffect(renderer, { separation: 0.3 });;
 
       scene = new THREE.Scene();
 
@@ -61,18 +61,19 @@
       controls.noPan = false;
       controls.autoRotate = true;
 
-    function setOrientationControls(e) {
+      function setOrientationControls(e) {
         if (!e.alpha) {
           return;
         }
-        if (controls == null) {
-            controls = new THREE.DeviceOrientationControls(camera, true);
-            controls.connect();
-            controls.update();
-        }
-        window.removeEventListener('deviceorientation', 
-            setOrientationControls.bind(this));
-    }
+
+        controls = new THREE.DeviceOrientationControls(camera, true);
+        controls.connect();
+        controls.update();
+
+        element.addEventListener('click', fullscreen, false);
+
+        window.removeEventListener('deviceorientation', setOrientationControls);
+      }
       window.addEventListener('deviceorientation', setOrientationControls, true);
 
 
