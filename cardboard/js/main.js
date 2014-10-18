@@ -9,6 +9,23 @@ var clock = new THREE.Clock();
 init();
 animate();
 
+function createLine() {
+  var material = new THREE.LineBasicMaterial({
+      color: 0x0000ff
+  });
+
+  var geometry = new THREE.Geometry();
+  geometry.vertices.push(
+      new THREE.Vector3(-100, 800, 0),
+      new THREE.Vector3(0, 100, 200),
+      new THREE.Vector3(140, 0, 100)
+  );
+
+  var line = new THREE.Line( geometry, material );
+
+  return line;
+}
+
 function init() {
   renderer = new THREE.WebGLRenderer();
   element = renderer.domElement;
@@ -54,7 +71,7 @@ function init() {
   scene.add(light);
 
   var texture = THREE.ImageUtils.loadTexture(
-    'textures/patterns/checker.png'
+    'textures/swirl_pattern.png'
   );
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
@@ -75,6 +92,9 @@ function init() {
   mesh.rotation.x = -Math.PI / 2;
   scene.add(mesh);
 
+  var line = createLine();
+  scene.add(line);
+  
   window.addEventListener('resize', resize, false);
   setTimeout(resize, 1);
 }
@@ -119,4 +139,6 @@ function fullscreen() {
   } else if (container.webkitRequestFullscreen) {
     container.webkitRequestFullscreen();
   }
+
+
 }
