@@ -29,7 +29,7 @@
   <script>
     var camera, scene, renderer;
     var effect, controls;
-    var element, container, light1;
+    var element, container;
 
     var clock = new THREE.Clock();
 
@@ -124,16 +124,7 @@
     }
 
     function render(dt) {
-
-    var targetX = light1.position.x * .07 + Math.PI;
-    var targetY = light1.position.y * -.07 ;
-
-    if (mesh) {
-        mesh.rotation.y += 0.05 * (targetX - mesh.rotation.y);
-        mesh.rotation.x += 0.05 * (targetY - mesh.rotation.x);
-    }
-
-    effect.render(scene, camera);
+      effect.render(scene, camera);
     }
 
     function animate(t) {
