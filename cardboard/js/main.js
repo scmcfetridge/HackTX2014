@@ -37,6 +37,7 @@ function createBall(x, y, z) {
     sphere.position.y = 100;
     sphere.position.x = x;
     sphere.position.z = z;
+    console.log("sphere drawn");
     return sphere;
 }
 
@@ -62,7 +63,7 @@ function init() {
     camera.position.z
   );
   controls.noZoom = true;
-  controls.noPan = true;
+  controls.noPan = false;
   controls.autoRotate = true;
 
   function setOrientationControls(e) {
@@ -173,11 +174,11 @@ Leap.loop({enableGestures: true}, function( frame ) {
             if (hand.pinchStrength > 0.6) {
                 // call function for drawing 
                 var finger = hand.fingers[1];
-                var position = finger.btipPosition;
-                console.log(finger.mcpPosition);
+                var position = finger.tipPosition;
+                console.log(finger.tipPosition);
 
                 // Add a circle at this position
-                var circle = createBall();
+                var circle = createBall(position[0], position[1], position[2]);
                 scene.add(circle);
                 render();
             }
