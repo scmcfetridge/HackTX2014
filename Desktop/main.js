@@ -1,10 +1,14 @@
 'use strict';
 
-var peer = new Peer('desktop', {key: 'ehbbvg90n4xtj4i'});
+var peer = new Peer('ngame', {key: 'ehbbvg90n4xtj4i'});
 
 var id = window.prompt("Enter ID");
-var conn = peer.connect('paige');
+var conn = peer.connect('mobile');
 conn.send({});
+
+conn.on('data', function(data) {
+  alert(data);
+});
 
 conn.on('open', function(){
   Leap.loop({enableGestures: true}, function( frame ) {  
@@ -22,5 +26,4 @@ conn.on('open', function(){
       }
     }
   });
-
 });
