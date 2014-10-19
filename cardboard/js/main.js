@@ -121,6 +121,8 @@ peer.on('open', function(id){
 
 peer.on('connection', function(conn) {
   alert("Hello dhsjkdh");
+    console.log("in cardboard main");
+    conn.send('hi there, from cardboard');
   conn.on('data', function(data){
       console.log(data);
       console.log("wowwowowowow");
