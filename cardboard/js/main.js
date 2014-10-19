@@ -156,7 +156,7 @@ Leap.loop({enableGestures: true}, function( frame ) {
                 // call function for drawing 
                 var finger = hand.fingers[1];
                 var position = finger.btipPosition;
-                cosole.log(finger.mcpPosition);
+                console.log(finger.mcpPosition);
             }
     }
 
