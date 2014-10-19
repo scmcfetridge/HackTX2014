@@ -29,15 +29,14 @@ function createLine() {
   return line;
 }
 
-function createBall(x, y, z) {
+function createBall(x, y, z, r) {
     var material = new THREE.MeshLambertMaterial({color: 0x00FF66});
     var ka = 0.4;
     material.ambient.setRGB(material.color.r * ka, material.color.g * ka, material.color.b * ka);
-    var sphere = new THREE.Mesh(new THREE.SphereGeometry(20, 15, 15), material);
-    sphere.position.y = 100;
-    sphere.position.x = x;
-    sphere.position.z = z;
-    console.log("sphere drawn");
+    var sphere = new THREE.Mesh(new THREE.SphereGeometry(r, r * 5, r * 5), material);
+    sphere.position.y = y / 7.5;
+    sphere.position.x = z + 10;
+    sphere.position.z = x + 75;
     return sphere;
 }
 
@@ -106,33 +105,9 @@ renderer.setClearColorHex( 0xa3a3a3, 1 );
   var mesh = new THREE.Mesh(geometry, material);
   mesh.rotation.x = -Math.PI / 2;
   scene.add(mesh);
-  // palm
-    geometry = new THREE.BoxGeometry( 100, 20, 80 );
-    material = new THREE.MeshNormalMaterial();
-    palm = new THREE.Mesh( geometry, material );
-    palm.position.x = 100;
-    palm.position.y = 25;
-    palm.position.z = -100;
-    palm.castShadow = true;
-    palm.receiveShadow = true;
-    scene.add( palm );
-
-    // fingers
-    geometry = new THREE.BoxGeometry( 16, 12, 1 );
-    for (var i = 0; i < 5; i++) {
-      mesh = new THREE.Mesh( geometry, material );
-      mesh.castShadow = true;
-      mesh.receiveShadow = true;
-      scene.add( mesh );
-      fingers.push( mesh );
-    }
 
   var line = createLine();
   scene.add(line);
-
-  var circle = createBall(50, 100, 50);
-  scene.add(circle);
-  render();
 
   
   window.addEventListener('resize', resize, false);
@@ -178,7 +153,7 @@ Leap.loop({enableGestures: true}, function( frame ) {
                 console.log(finger.tipPosition);
 
                 // Add a circle at this position
-                var circle = createBall(position[0], position[1], position[2]);
+                var circle = createBall(position[0], position[1], position[2], 2);
                 scene.add(circle);
                 render();
             }
