@@ -114,9 +114,9 @@ renderer.setClearColorHex( 0xa3a3a3, 1 );
   setTimeout(resize, 1);
 }
 
-var peer = new Peer('mobile', {key: 'ehbbvg90n4xtj4i'});
+var peer = new Peer('paige', {key: 'ehbbvg90n4xtj4i'});
 peer.on('open', function(id){
-  console.log("Connected");
+  console.log("Open");
 });
 
 peer.on('connection', function(conn) {

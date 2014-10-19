@@ -3,7 +3,7 @@
 var peer = new Peer('desktop', {key: 'ehbbvg90n4xtj4i'});
 
 var id = window.prompt("Enter ID");
-var conn = peer.connect('game');
+var conn = peer.connect('paige');
 conn.send({});
 
 conn.on('open', function(){
