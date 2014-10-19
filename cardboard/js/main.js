@@ -65,7 +65,7 @@ function init() {
 
   camera = new THREE.PerspectiveCamera(90, 1, 0.001, 500);
   camera.position.set(-100, 30, 0);
-  camera.lookat(-1, 0, 0);
+  camera.lookAt(-1, 0, 0);
   scene.add(camera);
 
   controls = new THREE.OrbitControls(camera, element);
