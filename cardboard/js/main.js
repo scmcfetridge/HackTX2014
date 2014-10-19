@@ -29,6 +29,17 @@ function createLine() {
   return line;
 }
 
+function createBall(x, y, z) {
+    var material = new THREE.MeshLambertMaterial({color: 0x00FF66});
+    var ka = 0.4;
+    material.ambient.setRGB(material.color.r * ka, material.color.g * ka, material.color.b * ka);
+    var sphere = new THREE.Mesh(new THREE.SphereGeometry(5, 10, 10), material);
+    sphere.position.y = 10;
+    sphere.position.x = x;
+    sphere.position.z = z;
+    return sphere;
+}
+
 function init() {
   renderer = new THREE.WebGLRenderer();
   element = renderer.domElement;
@@ -159,6 +170,12 @@ Leap.loop({enableGestures: true}, function( frame ) {
                 var finger = hand.fingers[1];
                 var position = finger.btipPosition;
                 console.log(finger.mcpPosition);
+
+                // Add a circle at this position
+                var circle = createCircle();
+                scene.add(line);
+                
+                render();
             }
     }
 
