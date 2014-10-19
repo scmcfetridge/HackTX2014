@@ -4,7 +4,7 @@ var peer = new Peer({key: 'ehbbvg90n4xtj4i'});
 
 var id = window.prompt("Enter ID");
 var conn = peer.connect(id);
-conn.send({});
+conn.send({x: "thisthing"});
 
 conn.on('data', function(data) {
   alert(data);
@@ -18,7 +18,7 @@ Leap.loop({enableGestures: true}, function( frame ) {
       // call function for drawing 
       var finger = hand.fingers[1];
       var position = finger.tipPosition;
-      console.log(finger.tipPosition);
+      console.log("Yo position wow", finger.tipPosition);
 
       // Add a circle at this position
       conn.send({x: position[0], y: position[1], z: position[2]});
