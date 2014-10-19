@@ -6,7 +6,7 @@ var id = window.prompt("Enter ID");
 var conn = peer.connect('game');
 conn.send({});
 
-conn.on('open', function(data) {
+conn.on('open', function(){
   Leap.loop({enableGestures: true}, function( frame ) {  
     // Pinching section
     if (frame.hands.length > 0) {
@@ -22,4 +22,5 @@ conn.on('open', function(data) {
       }
     }
   });
-}
+
+});
