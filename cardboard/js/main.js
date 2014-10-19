@@ -120,7 +120,7 @@ renderer.setClearColorHex( 0xa3a3a3, 1 );
   setTimeout(resize, 1);
 }
 
-Leap.loop( function( frame ) {
+Leap.loop({enableGestures: true}, function( frame ) {
     if (frame.valid && frame.gestures.length > 0) {
         frame.gestures.forEach(function(gesture) {
             if(gesture.type == "swipe") {
