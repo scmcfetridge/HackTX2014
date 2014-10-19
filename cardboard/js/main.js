@@ -151,10 +151,10 @@ Leap.loop({enableGestures: true}, function( frame ) {
     
     // Pinching section
     if (frame.hands.length > 0) {
-            hand = frame.hands[0];
+            var hand = frame.hands[0];
             if (hand.pinchStrength > 0.6) {
                 // call function for drawing 
-                finger = hand.fingers[1];
+                var finger = hand.fingers[1];
                 var position = finger.btipPosition;
                 cosole.log(finger.mcpPosition);
             }
