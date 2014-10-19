@@ -125,7 +125,7 @@ Leap.loop( function( frame ) {
     if ( frame.hands.length > 0) {
       hand = frame.hands[0];
       palm.position.set( hand.stabilizedPalmPosition[0], hand.stabilizedPalmPosition[1], hand.stabilizedPalmPosition[2] );
-      direction = v( hand.direction[0], hand.direction[1], hand.direction[2] );  // best so far
+      direction = new THREE.Vector3(hand.direction[0], hand.direction[1], hand.direction[2] );  // best so far
       palm.lookAt( direction.add( palm.position ) );
       palm.rotation.z = -hand.roll();
       //palm.rotation.set( hand.pitch(), -hand.yaw(), hand.roll() );

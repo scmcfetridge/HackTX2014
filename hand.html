@@ -122,31 +122,57 @@
 	}
 
 	Leap.loop( function( frame ) {
-		var hand, phalanx, point, length;
-		if ( frame.hands.length ) {
-			hand = frame.hands[0];
-			palm.position.set( hand.palmPosition[0], hand.palmPosition[1], hand.palmPosition[2] );
-//			palm.rotation.set( hand.pitch(), -hand.yaw(), hand.roll() );
-			direction = new THREE.Vector3( hand.direction[0], hand.direction[1], hand.direction[2] );  // best so far
-			palm.lookAt( direction.add( palm.position ) );
-			palm.rotation.z = -hand.roll();
-
-			data.innerHTML = 'Hand X:' + hand.palmPosition[0].toFixed(0) + ' Y:' +  hand.palmPosition[1].toFixed(0) + ' Z:' + hand.palmPosition[2].toFixed(0);
-		}
-		iLen = ( frame.pointables.length < 5 ) ? frame.pointables.length : 5;
-		for (var i = 0; i < iLen; i++) {
-			for ( var j = 0; j < 3; j++) {
-				phalanx = phalanges[ 3 * i + j];
-				point = frame.pointables[i].positions[j];
-				phalanx.position.set( point[0], point[1], point[2] );
-				point = frame.pointables[i].positions[ j + 1 ];
-				point = new THREE.Vector3( point[0], point[1], point[2] );
-				phalanx.lookAt( point );
-				length = phalanx.position.distanceTo( point );
-				phalanx.translateZ( 0.5 * length );
-				phalanx.scale.set( 1, 1, length );
-			}
-		}
+        if (frame.valid && frame.gestures.length > 0) {
+            frame.gestures.forEach(function(gesture) {
+                if(gesture.type == "swipe") {
+                    // Erase screen    
+                    var swipeDirection;
+                    //Classify swipe as either horizontal or vertical
+                  var isHorizontal = Math.abs(gesture.direction[0]) > Math.abs(gesture.direction[1]);
+                  //Classify as right-left or up-down
+                  if(isHorizontal){
+                      if(gesture.direction[0] > 0){
+                          swipeDirection = "right";
+                      } else {
+                          swipeDirection = "left";
+                      }
+                  } else { //vertical
+                      if(gesture.direction[1] > 0){
+                          swipeDirection = "up";
+                      } else {
+                          swipeDirection = "down";
+                      }                  
+                  }
+                  console.log(swipeDirection)
+                }
+            });
+        }
+        
+//		var hand, phalanx, point, length;
+//		if ( frame.hands.length ) {
+//			hand = frame.hands[0];
+//			palm.position.set( hand.palmPosition[0], hand.palmPosition[1], hand.palmPosition[2] );
+////			palm.rotation.set( hand.pitch(), -hand.yaw(), hand.roll() );
+//			direction = new THREE.Vector3( hand.direction[0], hand.direction[1], hand.direction[2] );  // best so far
+//			palm.lookAt( direction.add( palm.position ) );
+//			palm.rotation.z = -hand.roll();
+//
+//			data.innerHTML = 'Hand X:' + hand.palmPosition[0].toFixed(0) + ' Y:' +  hand.palmPosition[1].toFixed(0) + ' Z:' + hand.palmPosition[2].toFixed(0);
+//		}
+//		iLen = ( frame.pointables.length < 5 ) ? frame.pointables.length : 5;
+//		for (var i = 0; i < iLen; i++) {
+//			for ( var j = 0; j < 3; j++) {
+//				phalanx = phalanges[ 3 * i + j];
+//				point = frame.pointables[i].positions[j];
+//				phalanx.position.set( point[0], point[1], point[2] );
+//				point = frame.pointables[i].positions[ j + 1 ];
+//				point = new THREE.Vector3( point[0], point[1], point[2] );
+//				phalanx.lookAt( point );
+//				length = phalanx.position.distanceTo( point );
+//				phalanx.translateZ( 0.5 * length );
+//				phalanx.scale.set( 1, 1, length );
+//			}
+//		}
 	});
 
 	function animate() {
