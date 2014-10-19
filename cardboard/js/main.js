@@ -97,9 +97,9 @@ function init() {
     geometry = new THREE.BoxGeometry( 100, 20, 80 );
     material = new THREE.MeshNormalMaterial();
     palm = new THREE.Mesh( geometry, material );
-    // palm.position.x = 100;
-    // palm.position.y = 25;
-    // palm.position.z = -100;
+    palm.position.x = 100;
+    palm.position.y = 25;
+    palm.position.z = -100;
     palm.castShadow = true;
     palm.receiveShadow = true;
     scene.add( palm );
