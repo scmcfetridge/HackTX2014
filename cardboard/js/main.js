@@ -120,7 +120,9 @@ peer.on('open', function(id){
 });
 
 peer.on('connection', function(conn) {
+  alert("Hello");
   conn.on('data', function(data){
+    conn.send("Yay!");
     createBall(data.x, data.y, data.z, 2);
     scene.add(circle);
     render();
