@@ -12,15 +12,17 @@ animate();
 
 function createLine() {
   var material = new THREE.LineBasicMaterial({
-      color: 0x0000ff
+      color: 0x0000ff,
+      linewidth: 20
   });
 
   var geometry = new THREE.Geometry();
-  geometry.vertices.push(
-      new THREE.Vector3(-100, 800, 0),
-      new THREE.Vector3(0, 100, 200),
-      new THREE.Vector3(140, 0, 100)
-  );
+  for (var i = 0; i < 200; i++){
+    geometry.vertices.push(
+        new THREE.Vector3(-100, 800, 0),
+        new THREE.Vector3(0, 100, 200)
+    );
+  }
 
   var line = new THREE.Line( geometry, material );
 
