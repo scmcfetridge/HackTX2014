@@ -19,7 +19,7 @@ function createLine() {
   var geometry = new THREE.Geometry();
   for (var i = 0; i < 200; i++){
     geometry.vertices.push(
-        new THREE.Vector3(-100, 800, 0),
+        new THREE.Vector3(-100, 500, 0),
         new THREE.Vector3(0, 100, 200)
     );
   }
@@ -33,8 +33,8 @@ function createBall(x, y, z) {
     var material = new THREE.MeshLambertMaterial({color: 0x00FF66});
     var ka = 0.4;
     material.ambient.setRGB(material.color.r * ka, material.color.g * ka, material.color.b * ka);
-    var sphere = new THREE.Mesh(new THREE.SphereGeometry(5, 10, 10), material);
-    sphere.position.y = 10;
+    var sphere = new THREE.Mesh(new THREE.SphereGeometry(20, 15, 15), material);
+    sphere.position.y = 100;
     sphere.position.x = x;
     sphere.position.z = z;
     return sphere;
@@ -128,6 +128,11 @@ renderer.setClearColorHex( 0xa3a3a3, 1 );
 
   var line = createLine();
   scene.add(line);
+
+  var circle = createBall(50, 100, 50);
+  scene.add(circle);
+  render();
+
   
   window.addEventListener('resize', resize, false);
   setTimeout(resize, 1);
@@ -174,7 +179,6 @@ Leap.loop({enableGestures: true}, function( frame ) {
                 // Add a circle at this position
                 var circle = createBall();
                 scene.add(circle);
-                
                 render();
             }
     }
