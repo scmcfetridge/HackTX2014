@@ -1,9 +1,9 @@
 'use strict';
 
-var peer = new Peer('ngame', {key: 'ehbbvg90n4xtj4i'});
+var peer = new Peer({key: 'ehbbvg90n4xtj4i'});
 
 var id = window.prompt("Enter ID");
-var conn = peer.connect('mobile');
+var conn = peer.connect(id);
 conn.send({});
 
 conn.on('data', function(data) {

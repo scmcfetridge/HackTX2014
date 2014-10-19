@@ -114,15 +114,15 @@ renderer.setClearColorHex( 0xa3a3a3, 1 );
   setTimeout(resize, 1);
 }
 
-var peer = new Peer('mobile', {key: 'ehbbvg90n4xtj4i'});
+var peer = new Peer({key: 'ehbbvg90n4xtj4i'});
 peer.on('open', function(id){
-  console.log("Connected");
+  alert(JSON.stringify(id));
 });
 
 peer.on('connection', function(conn) {
   conn.on('data', function(data) {
     console.log('Received', data);
-    var c = createBall(data.x, data.y, data.z, 10);
+    var c = createBall(data.x, data.y, data.z, 3);
     scene.add(c);
     // if (lastPoint == null) {
     //   lastPoint = data;
