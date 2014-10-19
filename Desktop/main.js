@@ -11,6 +11,7 @@ conn.on('data', function(data) {
 });
 
 Leap.loop({enableGestures: true}, function( frame ) {  
+    conn.send({x: 10, y: 100, z: 10});
   // Pinching section
   if (frame.hands.length > 0) {
     var hand = frame.hands[0];
