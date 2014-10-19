@@ -6,6 +6,7 @@ var element, container;
 var info, palm, fingers = [];
 
 var clock = new THREE.Clock();
+var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
 init();
 animate();
@@ -61,9 +62,11 @@ function init() {
     camera.position.y,
     camera.position.z
   );
+  
+  
   controls.noZoom = true;
   controls.noPan = false;
-  controls.autoRotate = true;
+  controls.autoRotate = isMobile;
 
   function setOrientationControls(e) {
     if (!e.alpha) {

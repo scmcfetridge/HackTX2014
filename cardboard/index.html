@@ -4,33 +4,108 @@
     <title>Cardboard Example</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Cabin|Cabin+Sketch:400,700' rel='stylesheet' type='text/css'>
     <style>
       body {
-        margin: 0px;
-        overflow: hidden;
+        font-family: 'Cabin', cursive; 
       }
+      
+      #artist {
+        text-align: center;
+      }
+      
       #example {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        height: 450px;
+        width: 800px;
+      }
+      
+      input[type="image"] {
+        background-color: #ffffff;
+        font: 13px sans-serif;
+        text-decoration: none;
+        border: 5px solid #000;
+        font-weight: 700;
+        border-color: #FF69B4;
+        color: #FF69B4;
+        padding: 10px;
+        border-radius: 3px;
+        margin: 0px 0px;
+      }
+      
+      .prompt {
+        background-image: url(textures/geo_white.png);
+        background-repeat: repeat;
+        background-size: 250px;
+        border: 5px solid #FF69B4;
+        margin: 0px 300px;
+        color: #FF69B4;
+      }
+      
+      .box {
+        margin: 0px 300px;
+      }
+      
+      
+      h1 {
+        display: block;
+        padding-top: 10px;
+      }
+      
+      h2 {
+        font-size: 20px; 
+      }
+      
+      .timer {
+        color: #858585; 
+        font-weight: 500;
+      }
+      
+      .gesture {
+        display: inline-block;
+        font-weight: 500;
       }
     </style>
-    
   </head>
   <body>
     <div ng-controller="Controller">
+      <!-- Person viewing from computer and drawing-->
       <div id="artist" ng-hide="isMobile">
-        Drawing
-        <div id="example"></div>
+        <!-- Timer -->
+        <div class="timer">
+          <h2>{{minutes}}:{{seconds}}</h2><br/>
+        </div>
+        
+        <!-- Prompt -->
+        <div class="prompt">
+          <h1>draw {{words[wordNum]}}</h1>
+
+          <!-- Descriptive gesture buttons -->
+          <div class="gesture">
+            <input class="button" type="image" src="img/pinch.svg" ng-model="startButton" 
+                   ng-click="start()" ng-disabled="running" value="START" width="100" height="100">
+            <p>pinch to draw</p>
+          </div>
+          <div class="gesture">
+            <input type="image" src="img/erase.svg" ng-model="stopButton" ng-click="stop()" value="STOP" width="100" height="100"/>
+            <p>down to stop</p>
+          </div>
+          <div class="gesture">
+            <input type="image" src="img/next.svg" ng-model="clearButton" ng-click="next()" value="NEXT" width="100" height="100" />
+            <p>right to next</p>
+          </div>  
+        </div>
+        <!-- Display box to allow artist to get oriented -->
+        <div class="box" ng-show="showCanvas" id="example"></div>
       </div>
+      
+      <!-- Person viewing from cardboard -->
       <div id="viewer" ng-show="isMobile">Cardboard
         <div id="example"></div>
       </div>
     </div>
-
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+  
   <script src="js/third-party/threejs/three.min.js"></script>
   <script src="js/third-party/threejs/StereoEffect.js"></script>
   <script src="js/third-party/threejs/DeviceOrientationControls.js"></script>
