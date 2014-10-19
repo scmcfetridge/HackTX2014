@@ -2,7 +2,13 @@
 
 var peer = new Peer({key: 'ehbbvg90n4xtj4i'});
 
-var conn = peer.connect('another-peers-id');
+var id = window.prompt("Enter ID");
+var conn = peer.connect(id);
+conn.send({});
+
+conn.on('data', function(data) {
+  alert(data);
+});
 
 Leap.loop({enableGestures: true}, function( frame ) {  
   // Pinching section
