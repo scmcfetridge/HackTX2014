@@ -67,11 +67,11 @@ function init() {
   window.addEventListener('deviceorientation', setOrientationControls, true);
 
 
-  var light = new THREE.HemisphereLight(0x777777, 0x000000, 0.6);
+  var light = new THREE.HemisphereLight(0xffffff, 0x000000, 0.4);
   scene.add(light);
 
   var texture = THREE.ImageUtils.loadTexture(
-    'textures/swirl_pattern.png'
+    'textures/congruent_outline.png'
   );
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
@@ -85,13 +85,13 @@ function init() {
     shading: THREE.FlatShading,
     map: texture
   });
-
+renderer.setClearColorHex( 0xa3a3a3, 1 );
   var geometry = new THREE.PlaneGeometry(1000, 1000);
 
   var mesh = new THREE.Mesh(geometry, material);
   mesh.rotation.x = -Math.PI / 2;
   scene.add(mesh);
-
+  
   var line = createLine();
   scene.add(line);
   
@@ -139,6 +139,5 @@ function fullscreen() {
   } else if (container.webkitRequestFullscreen) {
     container.webkitRequestFullscreen();
   }
-
 
 }
