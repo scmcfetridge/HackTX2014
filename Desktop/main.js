@@ -4,7 +4,9 @@ var peer = new Peer({key: 'ehbbvg90n4xtj4i'});
 
 var id = window.prompt("Enter ID");
 var conn = peer.connect(id);
-conn.send('hi');
+conn.on('open', function(){
+  conn.send('hi!');
+});
 
 conn.on('data', function(data) {
   alert(data);
