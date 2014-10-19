@@ -12,19 +12,32 @@ animate();
 
 function createLine() {
   var material = new THREE.LineBasicMaterial({
-      color: 0x0000ff
+      color: 0x0000ff,
+      linewidth: 20
   });
 
   var geometry = new THREE.Geometry();
-  geometry.vertices.push(
-      new THREE.Vector3(-100, 800, 0),
-      new THREE.Vector3(0, 100, 200),
-      new THREE.Vector3(140, 0, 100)
-  );
+  for (var i = 0; i < 200; i++){
+    geometry.vertices.push(
+        new THREE.Vector3(-100, 500, 0),
+        new THREE.Vector3(0, 100, 200)
+    );
+  }
 
   var line = new THREE.Line( geometry, material );
 
   return line;
+}
+
+function createBall(x, y, z, r) {
+    var material = new THREE.MeshLambertMaterial({color: 0x00FF66});
+    var ka = 0.4;
+    material.ambient.setRGB(material.color.r * ka, material.color.g * ka, material.color.b * ka);
+    var sphere = new THREE.Mesh(new THREE.SphereGeometry(r, r * 5, r * 5), material);
+    sphere.position.y = y / 7.5;
+    sphere.position.x = z + 10;
+    sphere.position.z = x + 75;
+    return sphere;
 }
 
 function init() {
@@ -49,7 +62,7 @@ function init() {
     camera.position.z
   );
   controls.noZoom = true;
-  controls.noPan = true;
+  controls.noPan = false;
   controls.autoRotate = true;
 
   function setOrientationControls(e) {
@@ -92,29 +105,10 @@ renderer.setClearColorHex( 0xa3a3a3, 1 );
   var mesh = new THREE.Mesh(geometry, material);
   mesh.rotation.x = -Math.PI / 2;
   scene.add(mesh);
-  // palm
-    geometry = new THREE.BoxGeometry( 100, 20, 80 );
-    material = new THREE.MeshNormalMaterial();
-    palm = new THREE.Mesh( geometry, material );
-    palm.position.x = 100;
-    palm.position.y = 25;
-    palm.position.z = -100;
-    palm.castShadow = true;
-    palm.receiveShadow = true;
-    scene.add( palm );
-
-    // fingers
-    geometry = new THREE.BoxGeometry( 16, 12, 1 );
-    for (var i = 0; i < 5; i++) {
-      mesh = new THREE.Mesh( geometry, material );
-      mesh.castShadow = true;
-      mesh.receiveShadow = true;
-      scene.add( mesh );
-      fingers.push( mesh );
-    }
 
   var line = createLine();
   scene.add(line);
+
   
   window.addEventListener('resize', resize, false);
   setTimeout(resize, 1);
@@ -151,12 +145,17 @@ Leap.loop({enableGestures: true}, function( frame ) {
     
     // Pinching section
     if (frame.hands.length > 0) {
-            hand = frame.hands[0];
+            var hand = frame.hands[0];
             if (hand.pinchStrength > 0.6) {
                 // call function for drawing 
-                finger = hand.fingers[1];
-                var position = finger.btipPosition;
-                cosole.log(finger.mcpPosition);
+                var finger = hand.fingers[1];
+                var position = finger.tipPosition;
+                console.log(finger.tipPosition);
+
+                // Add a circle at this position
+                var circle = createBall(position[0], position[1], position[2], 2);
+                scene.add(circle);
+                render();
             }
     }
 
