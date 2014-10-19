@@ -173,7 +173,7 @@ Leap.loop({enableGestures: true}, function( frame ) {
 
                 // Add a circle at this position
                 var circle = createBall();
-                scene.add(line);
+                scene.add(circle);
                 
                 render();
             }
