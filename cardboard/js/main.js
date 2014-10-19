@@ -115,6 +115,7 @@ renderer.setClearColorHex( 0xa3a3a3, 1 );
 }
 
 var peer = new Peer({key: 'ehbbvg90n4xtj4i'});
+alert(JSON.stringify(peer));
 
 peer.on('connection', function(conn) {
   conn.on('data', function(data){
