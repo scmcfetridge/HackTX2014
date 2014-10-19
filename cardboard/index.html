@@ -38,6 +38,7 @@
         background-size: 250px;
         border: 5px solid #FF69B4;
         margin: 0px 300px;
+        padding: 15px;
         color: #FF69B4;
       }
       
@@ -48,21 +49,35 @@
       
       h1 {
         display: block;
-        padding-top: 10px;
       }
       
       h2 {
         font-size: 20px; 
+        line-height: 30px;
       }
       
       .timer {
         color: #858585; 
-        font-weight: 500;
+        font-weight: 400;
+        background-color: #fff;
+        width: 100px;
+        height: 40px;
+        margin: auto;
+        line-height: 40px;
       }
       
       .gesture {
         display: inline-block;
-        font-weight: 500;
+        font-weight: 400;
+      }
+      
+      .start {
+        background-color: #FF69B4;
+        color: white;
+        line-height: 70px;
+        padding: 10px;
+        margin: auto;
+        cursor: pointer;
       }
     </style>
   </head>
@@ -71,23 +86,28 @@
       <!-- Person viewing from computer and drawing-->
       <div id="artist" ng-hide="isMobile">
         <!-- Timer -->
-        <div class="timer">
-          <h2>{{minutes}}:{{seconds}}</h2><br/>
-        </div>
+
+          <a class="start" ng-show="startTimer" ng-model="startButton" 
+                   ng-click="start()">
+          START
+        </a>
         
         <!-- Prompt -->
         <div class="prompt">
-          <h1>draw {{words[wordNum]}}</h1>
+          <div class="timer" ng-hide="startTimer">
+            <h2>{{minutes}}:{{seconds}}</h2><br/>
+          </div>
+          
+          <h1 ng-hide="startTimer">draw {{words[wordNum]}}</h1>
 
           <!-- Descriptive gesture buttons -->
           <div class="gesture">
-            <input class="button" type="image" src="img/pinch.svg" ng-model="startButton" 
-                   ng-click="start()" ng-disabled="running" value="START" width="100" height="100">
+            <input class="button" type="image" src="img/pinch.svg"  ng-disabled="true" value="START" width="100" height="100">
             <p>pinch to draw</p>
           </div>
           <div class="gesture">
             <input type="image" src="img/erase.svg" ng-model="stopButton" ng-click="stop()" value="STOP" width="100" height="100"/>
-            <p>down to stop</p>
+            <p>down to erase</p>
           </div>
           <div class="gesture">
             <input type="image" src="img/next.svg" ng-model="clearButton" ng-click="next()" value="NEXT" width="100" height="100" />
@@ -114,8 +134,9 @@
   <script src="js/third-party/threejs/Coordinates.js"></script>
   <script src="../leap-0.6.3.min.js"></script>
   <script src="js/peer.js"></script>
-
-  <script src="js/main.js"></script>
+  
   <script src="js/controller.js"></script>
+  <script src="js/main.js"></script>
+
   </body>
 </html>

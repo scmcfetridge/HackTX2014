@@ -40,6 +40,47 @@ function createBall(x, y, z, r) {
     return sphere;
 }
 
+function clearMe(scene){
+    var obj, i;
+    var camera, scene, renderer, light, mesh;
+    for ( i = scene.children.length - 1; i >= 0 ; i -- ) {
+        obj = scene.children[ i ];
+        if ( obj !== scene && obj !== camera && obj !== light && obj !== mesh) {
+            scene.remove(obj);
+        }
+    }
+  
+    camera = new THREE.PerspectiveCamera(90, 1, 0.001, 700);
+  camera.position.set(0, 10, 0);
+  scene.add(camera);
+  
+    var light = new THREE.HemisphereLight(0xffffff, 0x000000, 0.4);
+  scene.add(light);
+
+  var texture = THREE.ImageUtils.loadTexture(
+    'textures/congruent_outline.png'
+  );
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat = new THREE.Vector2(50, 50);
+  //texture.anisotropy = renderer.getMaxAnisotropy();
+
+  var material = new THREE.MeshPhongMaterial({
+    color: 0xffffff,
+    specular: 0xffffff,
+    shininess: 20,
+    shading: THREE.FlatShading,
+    map: texture
+  });
+  //renderer.setClearColorHex( 0xa3a3a3, 1 );
+  var geometry = new THREE.PlaneGeometry(1000, 1000);
+
+  var mesh = new THREE.Mesh(geometry, material);
+  mesh.rotation.x = -Math.PI / 2;
+  scene.add(mesh);
+
+};
+
 function init() {
   renderer = new THREE.WebGLRenderer();
   element = renderer.domElement;
@@ -112,6 +153,7 @@ renderer.setClearColorHex( 0xa3a3a3, 1 );
   var point2 = [20, 30, 70];
   var line = createLine(point1, point2);
   scene.add(line);
+  clearMe(scene);
 
   window.addEventListener('resize', resize, false);
   setTimeout(resize, 1);
@@ -124,18 +166,27 @@ peer.on('open', function(id){
 
 peer.on('connection', function(conn) {
   conn.on('data', function(data) {
-    console.log('Received', data);
-    var c = createBall(data.x, data.y, data.z, 3);
-    scene.add(c);
-    // if (lastPoint == null) {
-    //   lastPoint = data;
-    // }
-    // else {
-    //   var temp = createLine(data, lastPoint);
-    //   scene.add(temp);
-    //   lastPoint = data;
-    // }
-    render();
+    if (data.length == 4 ) {
+      console.log('Received', data);
+      var c = createBall(data.x, data.y, data.z, 3);
+      scene.add(c);
+      // if (lastPoint == null) {
+      //   lastPoint = data;
+      // }
+      // else {
+      //   var temp = createLine(data, lastPoint);
+      //   scene.add(temp);
+      //   lastPoint = data;
+      // }
+      render();
+    }
+    else if (data.direction == 'next') {
+      clearMe(scene);
+      next();
+    }
+    else if (data.direction =='erase') {
+      clearMe(scene);
+    }
   });
 });
 

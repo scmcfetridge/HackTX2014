@@ -23,6 +23,7 @@ angular.module('airDraw', [])
       'coffee'
     ];
     $scope.wordNum = 0;
+    $scope.startTimer = true;
     $scope.showCanvas = true;
     $scope.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
@@ -54,6 +55,7 @@ angular.module('airDraw', [])
     timer();
     $timeout(function(){$scope.showCanvas = false;}, 5000, true);
     $scope.running = true;
+    $scope.startTimer = false;
   };
 
   $scope.next = function() {
