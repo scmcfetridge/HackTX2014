@@ -4,25 +4,24 @@ var camera, scene, renderer;
 var effect, controls;
 var element, container;
 var info, palm, fingers = [];
+var lastPoint = null;
 
 var clock = new THREE.Clock();
 
 init();
 animate();
 
-function createLine() {
+function createLine(point1, point2) {
   var material = new THREE.LineBasicMaterial({
       color: 0x0000ff,
       linewidth: 20
   });
 
   var geometry = new THREE.Geometry();
-  for (var i = 0; i < 200; i++){
     geometry.vertices.push(
-        new THREE.Vector3(-100, 500, 0),
-        new THREE.Vector3(0, 100, 200)
+        new THREE.Vector3(point1[0], point1[1], point1[2]),
+        new THREE.Vector3(point2[0], point2[1], point2[2])
     );
-  }
 
   var line = new THREE.Line( geometry, material );
 
@@ -106,24 +105,32 @@ renderer.setClearColorHex( 0xa3a3a3, 1 );
   mesh.rotation.x = -Math.PI / 2;
   scene.add(mesh);
 
-  var line = createLine();
+  var point1 = [60, 10, 90];
+  var point2 = [20, 30, 70];
+  var line = createLine(point1, point2);
   scene.add(line);
 
-  
   window.addEventListener('resize', resize, false);
   setTimeout(resize, 1);
 }
 
-var peer = new Peer({key: 'ehbbvg90n4xtj4i'});
+var peer = new Peer('mobile', {key: 'ehbbvg90n4xtj4i'});
 peer.on('open', function(id){
-  alert(JSON.stringify(id));
+  console.log("Connected");
 });
 
 peer.on('connection', function(conn) {
-  conn.on('data', function(data){
-    createBall(data.x, data.y, data.z, 2);
-    scene.add(circle);
-    render();
+  conn.on('data', function(data) {
+    console.log('Received', data);
+    // if (lastPoint == null) {
+    //   lastPoint = data;
+    // }
+    // else {
+    //   var temp = createLine(data, lastPoint);
+    //   scene.add(temp);
+    //   lastPoint = data;
+    // }
+    // render();
   });
 });
 
