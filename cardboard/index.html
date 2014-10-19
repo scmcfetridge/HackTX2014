@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="airDraw">
   <head>
     <title>Cardboard Example</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -17,17 +17,29 @@
         bottom: 0;
       }
     </style>
+    
   </head>
   <body>
-    <div id="example"></div>
+    <div ng-controller="Controller">
+      <div id="artist" ng-hide="isMobile">
+        Drawing
+        <div id="example"></div>
+      </div>
+      <div id="viewer" ng-show="isMobile">Cardboard
+        <div id="example"></div>
+      </div>
+    </div>
 
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
   <script src="js/third-party/threejs/three.min.js"></script>
   <script src="js/third-party/threejs/StereoEffect.js"></script>
   <script src="js/third-party/threejs/DeviceOrientationControls.js"></script>
   <script src="js/third-party/threejs/OrbitControls.js"></script>
   <script src="js/third-party/threejs/Coordinates.js"></script>
   <script src="../leap-0.6.3.min.js"></script>
+  <script src="js/peer.js"></script>
 
   <script src="js/main.js"></script>
+  <script src="js/controller.js"></script>
   </body>
 </html>

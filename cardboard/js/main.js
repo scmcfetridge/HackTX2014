@@ -114,52 +114,15 @@ renderer.setClearColorHex( 0xa3a3a3, 1 );
   setTimeout(resize, 1);
 }
 
-Leap.loop({enableGestures: true}, function( frame ) {
-    
-    // Gesture section
-    if (frame.valid && frame.gestures.length > 0) {
-        frame.gestures.forEach(function(gesture) {
-            if(gesture.type == "swipe") {
-                // Erase screen    
-                var swipeDirection;
-                //Classify swipe as either horizontal or vertical
-              var isHorizontal = Math.abs(gesture.direction[0]) > Math.abs(gesture.direction[1]);
-              //Classify as right-left or up-down
-              if(isHorizontal){
-                  if(gesture.direction[0] > 0){
-                      swipeDirection = "right";
-                  } else {
-                      swipeDirection = "left";
-                  }
-              } else { //vertical
-                  if(gesture.direction[1] > 0){
-                      swipeDirection = "up";
-                  } else {
-                      swipeDirection = "down";
-                  }                  
-              }
-              console.log(swipeDirection)
-            }
-        });
-    }
-    
-    // Pinching section
-    if (frame.hands.length > 0) {
-            var hand = frame.hands[0];
-            if (hand.pinchStrength > 0.6) {
-                // call function for drawing 
-                var finger = hand.fingers[1];
-                var position = finger.tipPosition;
-                console.log(finger.tipPosition);
+var peer = new Peer({key: 'ehbbvg90n4xtj4i'});
 
-                // Add a circle at this position
-                var circle = createBall(position[0], position[1], position[2], 2);
-                scene.add(circle);
-                render();
-            }
-    }
-
+peer.on('connection', function(conn) {
+  conn.on('data', function(data){
+    createBall(data.x, data.y, data.z, 2);
+    scene.add(circle);
+    render();
   });
+});
 
 function resize() {
   var width = container.offsetWidth;
