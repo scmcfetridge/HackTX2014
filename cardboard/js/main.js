@@ -20,8 +20,8 @@ function createLine(x1, y1, z1, x2, y2, z2) {
 
   var geometry = new THREE.Geometry();
     geometry.vertices.push(
-        new THREE.Vector3(x1, y1 / 4, z1),
-        new THREE.Vector3(x2, y2 / 4, z2)
+        new THREE.Vector3(x1 + 30, y1 / 7, z1 + 50),
+        new THREE.Vector3(x2 + 30, y2 / 7, z2 + 50)
     );
 
   var line = new THREE.Line( geometry, material );
@@ -40,6 +40,19 @@ function createBall(x, y, z, r) {
     return sphere;
 }
 
+function createBox(x, y, z, h) {
+    var material = new THREE.MeshLambertMaterial({color: 0xFFFF00});
+    var ka = 0.4;
+    material.ambient.setRGB(material.color.r * ka, material.color.g * ka, material.color.b * ka);
+    var box = new THREE.Mesh(new THREE.BoxGeometry(h, h, h), material);
+    box.position.y = y/1.5;
+    box.position.x = z/3;
+    box.position.z = x;
+    console.log ('actual ', x, y ,z);
+    return box;
+  }
+
+
 function init() {
   renderer = new THREE.WebGLRenderer();
   element = renderer.domElement;
@@ -50,8 +63,8 @@ function init() {
 
   scene = new THREE.Scene();
 
-  camera = new THREE.PerspectiveCamera(90, 1, 0.001, 700);
-  camera.position.set(0, 10, 0);
+  camera = new THREE.PerspectiveCamera(90, 1, 0.001, 500);
+  camera.position.set(-100, 30, 0);
   scene.add(camera);
 
   controls = new THREE.OrbitControls(camera, element);
@@ -124,24 +137,26 @@ peer.on('connection', function(conn) {
   conn.on('data', function(data) {
     if(data != null){
     console.log('Received', data);
-    // var c = createBall(data.x, data.y, data.z, 3);
-    // scene.add(c);
-    if (lastPoint[0] == null) {
-      lastPoint[0] = data.x;
-      lastPoint[1] = data.y;
-      lastPoint[2] = data.z;
-    }
-    else if(!data.pinch) {
-      lastPoint[0] = null;
-    }
-    else {
-      var temp = createLine(data.x, data.y, data.z, lastPoint[0], lastPoint[1], lastPoint[2]);
-      scene.add(temp);
-      lastPoint[0] = data.x;
-      lastPoint[1] = data.y;
-      lastPoint[2] = data.z;
-    }
-    render();
+    var c = createBox(data.x, data.y / 5, data.z, 4);
+    scene.add(c);
+    // if (data[2] < 100 && data[2] > -100 && data[0] < 100 && data[0] > -100){
+    // if (lastPoint[0] == null) {
+    //   lastPoint[0] = data.x;
+    //   lastPoint[1] = data.y;
+    //   lastPoint[2] = data.z;
+    // }
+    // else if(!data.pinch) {
+    //   lastPoint[0] = null;
+    // }
+    // else {
+    //   var temp = createLine(data.x, data.y, data.z, lastPoint[0], lastPoint[1], lastPoint[2]);
+    //   scene.add(temp);
+    //   lastPoint[0] = data.x;
+    //   lastPoint[1] = data.y;
+    //   lastPoint[2] = data.z;
+    // }
+    // render();
+  //}
   }
   });
 });
