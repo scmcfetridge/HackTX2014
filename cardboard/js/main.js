@@ -120,14 +120,14 @@ peer.on('open', function(id){
 });
 
 peer.on('connection', function(conn) {
-  alert("Hello");
+  alert("Hello dhsjkdh");
   conn.on('data', function(data){
       console.log(data);
       console.log("wowwowowowow");
     conn.send("Yay!");
-    circle = createBall(data.x, data.y, data.z, 2);
-    scene.add(circle);
-    render();
+//    circle = createBall(data.x, data.y, data.z, 2);
+//    scene.add(circle);
+//    render();
   });
 });
 
