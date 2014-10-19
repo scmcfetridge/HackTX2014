@@ -45,7 +45,7 @@ function createBox(x, y, z, h) {
     var ka = 0.4;
     material.ambient.setRGB(material.color.r * ka, material.color.g * ka, material.color.b * ka);
     var box = new THREE.Mesh(new THREE.BoxGeometry(h, h, h), material);
-    box.position.y = y/1.5;
+    box.position.y = y;
     box.position.x = z/3;
     box.position.z = x;
     console.log ('actual ', x, y ,z);
@@ -65,6 +65,7 @@ function init() {
 
   camera = new THREE.PerspectiveCamera(90, 1, 0.001, 500);
   camera.position.set(-100, 30, 0);
+  camera.lookat(-1, 0, 0);
   scene.add(camera);
 
   controls = new THREE.OrbitControls(camera, element);
