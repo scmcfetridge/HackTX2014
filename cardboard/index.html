@@ -21,7 +21,13 @@
   </head>
   <body>
     <div ng-controller="Controller">
+      <div id="artist" ng-hide="isMobile">
+        Drawing
         <div id="example"></div>
+      </div>
+      <div id="viewer" ng-show="isMobile">Cardboard
+        <div id="example"></div>
+      </div>
     </div>
 
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
@@ -31,7 +37,7 @@
   <script src="js/third-party/threejs/OrbitControls.js"></script>
   <script src="js/third-party/threejs/Coordinates.js"></script>
   <script src="../leap-0.6.3.min.js"></script>
-  <script src="js/peer.js"></script>
+  <script src="http://cdn.peerjs.com/0.3/peer.js"></script>
 
   <script src="js/main.js"></script>
   <script src="js/controller.js"></script>
