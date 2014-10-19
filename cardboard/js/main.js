@@ -172,7 +172,7 @@ Leap.loop({enableGestures: true}, function( frame ) {
                 console.log(finger.mcpPosition);
 
                 // Add a circle at this position
-                var circle = createCircle();
+                var circle = createBall();
                 scene.add(line);
                 
                 render();
