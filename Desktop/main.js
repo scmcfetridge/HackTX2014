@@ -2,13 +2,6 @@
 
 var peer = new Peer({key: 'kgikay9ttiseb3xr'});
 
-var bx = 0;
-var lx = 0;
-var by = 0;
-var ly = 0;
-var bz = 0;
-var lz = 0;
-
 var id = window.prompt("Enter ID");
 var conn = peer.connect(id);
 conn.send({});

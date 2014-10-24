@@ -8,7 +8,6 @@ var lastPoint = [];
 lastPoint[0] = null;
 
 var clock = new THREE.Clock();
-var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
 init();
 animate();
@@ -40,47 +39,6 @@ function createBall(x, y, z, r) {
     sphere.position.z = x + 75;
     return sphere;
 }
-
-function clearMe(scene){
-    var obj, i;
-    var camera, scene, renderer, light, mesh;
-    for ( i = scene.children.length - 1; i >= 0 ; i -- ) {
-        obj = scene.children[ i ];
-        if ( obj !== scene && obj !== camera && obj !== light && obj !== mesh) {
-            scene.remove(obj);
-        }
-    }
-  
-    camera = new THREE.PerspectiveCamera(90, 1, 0.001, 700);
-  camera.position.set(0, 10, 0);
-  scene.add(camera);
-  
-    var light = new THREE.HemisphereLight(0xffffff, 0x000000, 0.4);
-  scene.add(light);
-
-  var texture = THREE.ImageUtils.loadTexture(
-    'textures/congruent_outline.png'
-  );
-  texture.wrapS = THREE.RepeatWrapping;
-  texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat = new THREE.Vector2(50, 50);
-  //texture.anisotropy = renderer.getMaxAnisotropy();
-
-  var material = new THREE.MeshPhongMaterial({
-    color: 0xffffff,
-    specular: 0xffffff,
-    shininess: 20,
-    shading: THREE.FlatShading,
-    map: texture
-  });
-  //renderer.setClearColorHex( 0xa3a3a3, 1 );
-  var geometry = new THREE.PlaneGeometry(1000, 1000);
-
-  var mesh = new THREE.Mesh(geometry, material);
-  mesh.rotation.x = -Math.PI / 2;
-  scene.add(mesh);
-
-};
 
 function createBox(x, y, z, h) {
     var material = new THREE.MeshLambertMaterial({color: 0xFFFF00});
@@ -117,12 +75,9 @@ function init() {
     camera.position.y,
     camera.position.z
   );
-  
-  
   controls.noZoom = true;
-  controls.autoRotate = isMobile;
   controls.noPan = true;
-  //controls.autoRotate = true;
+  controls.autoRotate = true;
 
   function setOrientationControls(e) {
     if (!e.alpha) {
@@ -143,9 +98,8 @@ function init() {
   var light = new THREE.HemisphereLight(0xffffff, 0x000000, 0.4);
   scene.add(light);
 
-  var texture = THREE.ImageUtils.loadTexture(
-    'textures/congruent_outline.png'
-  );
+  var texture = THREE.ImageUtils.loadTexture('textures/patterns/checker.png');
+
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
   texture.repeat = new THREE.Vector2(50, 50);
@@ -174,45 +128,38 @@ renderer.setClearColorHex( 0xa3a3a3, 1 );
   setTimeout(resize, 1);
 }
 
-//var peer = new Peer({key: 'xf5d4rad9yffxbt9'});
-//peer.on('open', function(id){
-//  alert(JSON.stringify(id));
-//});
-//
-//peer.on('connection', function(conn) {
-//  conn.on('data', function(data) {
-//    if (data.length == 4 ) {
-//    console.log('Received', data);
-//    var c = createBox(data.x, data.y / 5, data.z, 4);
-//    scene.add(c);
-//    // if (data[2] < 100 && data[2] > -100 && data[0] < 100 && data[0] > -100){
-//    // if (lastPoint[0] == null) {
-//    //   lastPoint[0] = data.x;
-//    //   lastPoint[1] = data.y;
-//    //   lastPoint[2] = data.z;
-//    // }
-//    // else if(!data.pinch) {
-//    //   lastPoint[0] = null;
-//    // }
-//    // else {
-//    //   var temp = createLine(data.x, data.y, data.z, lastPoint[0], lastPoint[1], lastPoint[2]);
-//    //   scene.add(temp);
-//    //   lastPoint[0] = data.x;
-//    //   lastPoint[1] = data.y;
-//    //   lastPoint[2] = data.z;
-//    // }
-//    // render();
-//  //}
-//  }
-//    else if (data.direction == 'next') {
-//      clearMe(scene);
-//      next();
-//    }
-//    else if (data.direction =='erase') {
-//      clearMe(scene);
-//    }
-//  });
-//});
+// var peer = new Peer({key: 'xf5d4rad9yffxbt9'});
+// peer.on('open', function(id){
+//   alert(JSON.stringify(id));
+// });
+
+// peer.on('connection', function(conn) {
+//   conn.on('data', function(data) {
+//     if(data != null){
+//     console.log('Received', data);
+//     var c = createBox(data.x, data.y / 5, data.z, 4);
+//     scene.add(c);
+//     // if (data[2] < 100 && data[2] > -100 && data[0] < 100 && data[0] > -100){
+//     // if (lastPoint[0] == null) {
+//     //   lastPoint[0] = data.x;
+//     //   lastPoint[1] = data.y;
+//     //   lastPoint[2] = data.z;
+//     // }
+//     // else if(!data.pinch) {
+//     //   lastPoint[0] = null;
+//     // }
+//     // else {
+//     //   var temp = createLine(data.x, data.y, data.z, lastPoint[0], lastPoint[1], lastPoint[2]);
+//     //   scene.add(temp);
+//     //   lastPoint[0] = data.x;
+//     //   lastPoint[1] = data.y;
+//     //   lastPoint[2] = data.z;
+//     // }
+//     // render();
+//   //}
+//   }
+//   });
+// });
 
 function resize() {
   var width = container.offsetWidth;
