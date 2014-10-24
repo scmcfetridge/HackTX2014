@@ -111,7 +111,7 @@ function init() {
     shading: THREE.FlatShading,
     map: texture
   });
-  renderer.setClearColorHex( 0x00ff00, 1 );
+  renderer.setClearColorHex( 0x82CAFA, 1 );
   var geometry = new THREE.PlaneGeometry(1000, 1000);
 
   var mesh = new THREE.Mesh(geometry, material);
