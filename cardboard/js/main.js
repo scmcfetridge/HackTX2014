@@ -120,7 +120,7 @@ renderer.setClearColorHex( 0xa3a3a3, 1 );
   scene.add(mesh);
 
   // Testing pieces 
-  for (int i = 5; i < 20; i++) {
+  for (var i = 5; i < 20; i++) {
     var box = createBox(i, i * 2, 20, 5);
     scene.add(box);
     var ball = createBall( i, i * 1.5, 10, 5);
