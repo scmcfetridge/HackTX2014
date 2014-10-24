@@ -95,7 +95,7 @@ function init() {
   window.addEventListener('deviceorientation', setOrientationControls, true);
 
 
-  var light = new THREE.HemisphereLight(0xffffff, 0x000000, 0.4);
+  var light = new THREE.HemisphereLight(0xffffff, 0x000000, 0.9);
   scene.add(light);
 
   var texture = THREE.ImageUtils.loadTexture('textures/patterns/checker.png');
@@ -118,6 +118,11 @@ renderer.setClearColorHex( 0xa3a3a3, 1 );
   var mesh = new THREE.Mesh(geometry, material);
   mesh.rotation.x = -Math.PI / 2;
   scene.add(mesh);
+
+  // Testing pieces 
+  createBox(20, 20, 40, 5);
+  createBall( 50, 50, 20, 10);
+  createBox(20, 10, 20, 8);
 
   // var point1 = [60, 10, 90];
   // var point2 = [20, 30, 70];
