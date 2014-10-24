@@ -107,11 +107,11 @@ function init() {
   var material = new THREE.MeshPhongMaterial({
     color: 0xffffff,
     specular: 0xffffff,
-    shininess: 20,
+    shininess: 5,
     shading: THREE.FlatShading,
     map: texture
   });
-  renderer.setClearColorHex( 0xa3a3a3, 1 );
+  renderer.setClearColorHex( 0x00ff00, 1 );
   var geometry = new THREE.PlaneGeometry(1000, 1000);
 
   var mesh = new THREE.Mesh(geometry, material);
