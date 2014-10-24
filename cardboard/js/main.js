@@ -48,13 +48,12 @@ function createBox(x, y, z, h) {
     box.position.y = y;
     box.position.x = z/3;
     box.position.z = x;
-    console.log ('actual ', x, y ,z);
     return box;
   }
 
 
 function init() {
-  renderer = new THREE.WebGLRenderer();
+  renderer = new THREE.WebGLRenderer({ alpha: true });
   element = renderer.domElement;
   container = document.getElementById('example');
   container.appendChild(element);
@@ -112,7 +111,7 @@ function init() {
     shading: THREE.FlatShading,
     map: texture
   });
-renderer.setClearColorHex( 0xa3a3a3, 1 );
+  renderer.setClearColorHex( 0xa3a3a3, 1 );
   var geometry = new THREE.PlaneGeometry(1000, 1000);
 
   var mesh = new THREE.Mesh(geometry, material);
@@ -121,9 +120,9 @@ renderer.setClearColorHex( 0xa3a3a3, 1 );
 
   // Testing pieces 
   for (var i = 5; i < 20; i++) {
-    var box = createBox(i * 2, i * 5, 20, 5);
+    var box = createBox(i * 20, i * 30, 20, 5);
     scene.add(box);
-    var ball = createBall( i * 4, i * 20, 10, 5);
+    var ball = createBall( i * 15, i * 20, 10, 5);
     scene.add(ball);
   }
 
