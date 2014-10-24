@@ -1,6 +1,6 @@
 'use strict';
 
-var peer = new Peer({key: 'xf5d4rad9yffxbt9'});
+var peer = new Peer({key: 'kgikay9ttiseb3xr'});
 
 var bx = 0;
 var lx = 0;
@@ -31,7 +31,7 @@ conn.on('open', function(){
       // Add a circle at this position
       conn.send({x: position[0], y: position[1], z: position[2], pinch: pinchBool});
       }
-    }
+    
     if (frame.gestures.length > 0) {
         var swipeDirection;
         var action;

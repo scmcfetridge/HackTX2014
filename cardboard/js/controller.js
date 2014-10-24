@@ -38,7 +38,7 @@ angular.module('airDraw', [])
       $("#example").css({"width": width, "height":width*9/16, });
     }
   }
-  $timeout($scope.formatCardBoard);
+  //$timeout($scope.formatCardBoard);
   
   //Stopwatch
   var timeoutId;

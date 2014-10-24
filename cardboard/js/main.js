@@ -174,45 +174,45 @@ renderer.setClearColorHex( 0xa3a3a3, 1 );
   setTimeout(resize, 1);
 }
 
-var peer = new Peer({key: 'xf5d4rad9yffxbt9'});
-peer.on('open', function(id){
-  alert(JSON.stringify(id));
-});
-
-peer.on('connection', function(conn) {
-  conn.on('data', function(data) {
-    if (data.length == 4 ) {
-    console.log('Received', data);
-    var c = createBox(data.x, data.y / 5, data.z, 4);
-    scene.add(c);
-    // if (data[2] < 100 && data[2] > -100 && data[0] < 100 && data[0] > -100){
-    // if (lastPoint[0] == null) {
-    //   lastPoint[0] = data.x;
-    //   lastPoint[1] = data.y;
-    //   lastPoint[2] = data.z;
-    // }
-    // else if(!data.pinch) {
-    //   lastPoint[0] = null;
-    // }
-    // else {
-    //   var temp = createLine(data.x, data.y, data.z, lastPoint[0], lastPoint[1], lastPoint[2]);
-    //   scene.add(temp);
-    //   lastPoint[0] = data.x;
-    //   lastPoint[1] = data.y;
-    //   lastPoint[2] = data.z;
-    // }
-    // render();
-  //}
-  }
-    else if (data.direction == 'next') {
-      clearMe(scene);
-      next();
-    }
-    else if (data.direction =='erase') {
-      clearMe(scene);
-    }
-  });
-});
+//var peer = new Peer({key: 'xf5d4rad9yffxbt9'});
+//peer.on('open', function(id){
+//  alert(JSON.stringify(id));
+//});
+//
+//peer.on('connection', function(conn) {
+//  conn.on('data', function(data) {
+//    if (data.length == 4 ) {
+//    console.log('Received', data);
+//    var c = createBox(data.x, data.y / 5, data.z, 4);
+//    scene.add(c);
+//    // if (data[2] < 100 && data[2] > -100 && data[0] < 100 && data[0] > -100){
+//    // if (lastPoint[0] == null) {
+//    //   lastPoint[0] = data.x;
+//    //   lastPoint[1] = data.y;
+//    //   lastPoint[2] = data.z;
+//    // }
+//    // else if(!data.pinch) {
+//    //   lastPoint[0] = null;
+//    // }
+//    // else {
+//    //   var temp = createLine(data.x, data.y, data.z, lastPoint[0], lastPoint[1], lastPoint[2]);
+//    //   scene.add(temp);
+//    //   lastPoint[0] = data.x;
+//    //   lastPoint[1] = data.y;
+//    //   lastPoint[2] = data.z;
+//    // }
+//    // render();
+//  //}
+//  }
+//    else if (data.direction == 'next') {
+//      clearMe(scene);
+//      next();
+//    }
+//    else if (data.direction =='erase') {
+//      clearMe(scene);
+//    }
+//  });
+//});
 
 function resize() {
   var width = container.offsetWidth;
