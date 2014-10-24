@@ -107,7 +107,7 @@ function init() {
   var material = new THREE.MeshPhongMaterial({
     color: 0xffffff,
     specular: 0xffffff,
-    shininess: 5,
+    shininess: 1,
     shading: THREE.FlatShading,
     map: texture
   });
@@ -125,6 +125,8 @@ function init() {
     var ball = createBall( i * 15, i * 20, 10, 5);
     scene.add(ball);
   }
+
+  scene.fog = new THREE.Fog(0xffffff, 10, 60);
 
   // var point1 = [60, 10, 90];
   // var point2 = [20, 30, 70];
