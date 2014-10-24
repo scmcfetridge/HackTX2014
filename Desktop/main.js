@@ -63,20 +63,5 @@ conn.on('open', function(){
            }
          }
       }
-
-    //   if(position != null){
-    //   if (bx > position[0]) bx = position[0];
-    //   if (lx < position[0]) lx = position[0];
-    //   if (by > position[1]) by = position[1];
-    //   if (ly < position[1]) ly = position[1];
-    //   if (bz > position[2]) bz = position[2];
-    //   if (lz < position[2]) lz = position[2];
-    // }
-    //   console.log('bx ', bx);
-    //   console.log('lx ', lx);
-    //   console.log('by ', by);
-    //   console.log('ly ', ly);
-    //   console.log('bz ', bz);
-    //   console.log('lz ', lz);
   });
 });
