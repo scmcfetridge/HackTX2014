@@ -121,9 +121,9 @@ renderer.setClearColorHex( 0xa3a3a3, 1 );
 
   // Testing pieces 
   for (var i = 5; i < 20; i++) {
-    var box = createBox(i, i * 2, 20, 5);
+    var box = createBox(i * 2, i * 5, 20, 5);
     scene.add(box);
-    var ball = createBall( i, i * 1.5, 10, 5);
+    var ball = createBall( i * 4, i * 20, 10, 5);
     scene.add(ball);
   }
 
