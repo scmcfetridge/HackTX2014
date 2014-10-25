@@ -94,7 +94,7 @@ function init() {
   window.addEventListener('deviceorientation', setOrientationControls, true);
 
 
-  var light = new THREE.HemisphereLight(0xffffff, 0x000000, 0.8);
+  var light = new THREE.HemisphereLight(0xFFEFA0, 0x4F1EC0, 0.8);
   scene.add(light);
 
   var texture = THREE.ImageUtils.loadTexture('textures/patterns/checker.png');
@@ -104,8 +104,8 @@ function init() {
   texture.anisotropy = renderer.getMaxAnisotropy();
 
   var material = new THREE.MeshPhongMaterial({
-    color: 0xFFEFA0,
-    specular: 0x4F1EC0,
+    color: 0xFFFFFF,
+    specular: 0xFFFFFF,
     shininess: 1,
     shading: THREE.FlatShading,
     map: texture
@@ -119,7 +119,7 @@ function init() {
 
   // Testing pieces 
   for (var i = 5; i < 20; i++) {
-    var box = createBox(i * 20, i * 30, 20, 5);
+    var box = createBox(i * 20, i * 20, 20, 5);
     scene.add(box);
     var ball = createBall( i * 15, i * 20, 10, 5);
     scene.add(ball);
