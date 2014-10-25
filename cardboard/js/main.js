@@ -126,7 +126,7 @@ function init() {
     scene.add(ball);
   }
 
-  scene.fog = new THREE.FogExp2(0xA8CBD8, .00001);
+  scene.fog = new THREE.FogExp2(0xA8CBD8, .0025);
 
   // var point1 = [60, 10, 90];
   // var point2 = [20, 30, 70];
