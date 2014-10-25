@@ -111,7 +111,7 @@ function init() {
     shading: THREE.FlatShading,
     map: texture
   });
-  renderer.setClearColorHex( 0x82CAFA, 1 );
+  renderer.setClearColor( 0x82CAFA, 1 );
   var geometry = new THREE.PlaneGeometry(1000, 1000);
 
   var mesh = new THREE.Mesh(geometry, material);
@@ -126,7 +126,7 @@ function init() {
     scene.add(ball);
   }
 
-  scene.fog = new THREE.Fog(0xBCDDE9, 30, 1000);
+  scene.fog = new THREE.Fog(0xBCDDE9, 30, 200);
 
   // var point1 = [60, 10, 90];
   // var point2 = [20, 30, 70];
