@@ -117,7 +117,7 @@ function init() {
   mesh.rotation.x = -Math.PI / 2;
   scene.add(mesh);
 
-  Testing pieces 
+  // Testing pieces 
   for (var i = 5; i < 20; i++) {
     var box = createBox(i * 20, i * 30, 20, 5);
     scene.add(box);
