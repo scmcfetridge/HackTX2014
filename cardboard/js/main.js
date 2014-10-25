@@ -98,20 +98,19 @@ function init() {
   scene.add(light);
 
   var texture = THREE.ImageUtils.loadTexture('textures/patterns/checker.png');
-
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
   texture.repeat = new THREE.Vector2(50, 50);
   texture.anisotropy = renderer.getMaxAnisotropy();
 
   var material = new THREE.MeshPhongMaterial({
-    color: 0xffffff,
-    specular: 0xffffff,
+    color: 0xFFEFA0,
+    specular: 0x4F1EC0,
     shininess: 1,
     shading: THREE.FlatShading,
     map: texture
   });
-  renderer.setClearColorHex( 0x82CAFA, 1 );
+  renderer.setColorHex( 0x82CAFA, 1);
   var geometry = new THREE.PlaneGeometry(1000, 1000);
 
   var mesh = new THREE.Mesh(geometry, material);
@@ -119,12 +118,12 @@ function init() {
   scene.add(mesh);
 
   // Testing pieces 
-  for (var i = 5; i < 20; i++) {
-    var box = createBox(i * 20, i * 30, 20, 5);
-    scene.add(box);
-    var ball = createBall( i * 15, i * 20, 10, 5);
-    scene.add(ball);
-  }
+  // for (var i = 5; i < 20; i++) {
+  //   var box = createBox(i * 20, i * 30, 20, 5);
+  //   scene.add(box);
+  //   var ball = createBall( i * 15, i * 20, 10, 5);
+  //   scene.add(ball);
+  // }
 
   scene.fog = new THREE.Fog(0xA8CBD8, 40, 200);
 
