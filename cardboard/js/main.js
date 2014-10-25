@@ -94,7 +94,7 @@ function init() {
   window.addEventListener('deviceorientation', setOrientationControls, true);
 
 
-  var light = new THREE.HemisphereLight(0xFFEFA0, 0x4F1EC0, 0.8);
+  var light = new THREE.HemisphereLight(0xFFFAEB, 0x120247, 0.8);
   scene.add(light);
 
   var texture = THREE.ImageUtils.loadTexture('textures/patterns/checker.png');
