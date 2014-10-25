@@ -117,13 +117,13 @@ function init() {
   mesh.rotation.x = -Math.PI / 2;
   scene.add(mesh);
 
-  // Testing pieces 
-  // for (var i = 5; i < 20; i++) {
-  //   var box = createBox(i * 20, i * 30, 20, 5);
-  //   scene.add(box);
-  //   var ball = createBall( i * 15, i * 20, 10, 5);
-  //   scene.add(ball);
-  // }
+  Testing pieces 
+  for (var i = 5; i < 20; i++) {
+    var box = createBox(i * 20, i * 30, 20, 5);
+    scene.add(box);
+    var ball = createBall( i * 15, i * 20, 10, 5);
+    scene.add(ball);
+  }
 
   scene.fog = new THREE.Fog(0xA8CBD8, 40, 200);
 
